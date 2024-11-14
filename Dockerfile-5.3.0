@@ -17,7 +17,7 @@ COPY 5.3/trusted.gpg /etc/apt/trusted.gpg
 # This is for NTP package
 RUN mkdir -p /usr/lib/systemd/system-preset/
 
-RUN apt update
+RUN apt update -o Acquire::AllowInsecureRepositories=true
 
 # Delete unwanted packages
 RUN  sed -i '/cumulus-docker-setup/d' packages && \
@@ -42,16 +42,16 @@ RUN  sed -i '/cumulus-docker-setup/d' packages && \
     sed -i '/openvswitch-vtep/d' packages
 
 # Install everything else
-RUN apt install --allow-downgrades -y $(cat packages)
+RUN apt install --allow-downgrades --allow-unauthenticated -y $(cat packages)
 
 # Workaround for watchdog
-RUN apt install -y watchdog || sed -i '/systemctl/d' /var/lib/dpkg/info/watchdog.postinst && \
-    apt install -y watchdog
+RUN apt install --allow-unauthenticated -y watchdog || sed -i '/systemctl/d' /var/lib/dpkg/info/watchdog.postinst && \
+    apt install --allow-unauthenticated -y watchdog
 
 # Workaround for nvue
 RUN ln -s /usr/bin/env /bin/env
-RUN apt install -y python3-nvue || sed -i '/systemctl restart/d' /var/lib/dpkg/info/python3-nvue.postinst && \
-    apt install -y python3-nvue && \
+RUN apt install --allow-unauthenticated -y python3-nvue || sed -i '/systemctl restart/d' /var/lib/dpkg/info/python3-nvue.postinst && \
+    apt install --allow-unauthenticated -y python3-nvue && \
     sed -i 's/KEY=.*/KEY=nvue/' /usr/lib/nvue/nvued-pre.sh
 
 RUN echo ". /etc/profile" >> /root/.bashrc

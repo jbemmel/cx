@@ -1,6 +1,9 @@
 # Cumulus Linux package repository
-deb      https://apt.cumulusnetworks.com/repo CumulusLinux-5.10-latest cumulus upstream netq
-deb-src  https://apt.cumulusnetworks.com/repo CumulusLinux-5.10-latest cumulus upstream netq
+# deb      https://apt.cumulusnetworks.com/repo CumulusLinux-5.10-latest cumulus upstream netq
+# deb-src  https://apt.cumulusnetworks.com/repo CumulusLinux-5.10-latest cumulus upstream netq
+deb      https://apt.cumulusnetworks.com/repo CumulusLinux-d12-latest cumulus upstream netq
+deb-src  https://apt.cumulusnetworks.com/repo CumulusLinux-d12-latest cumulus upstream netq
+
 # JvB expired
 # deb      http://apt.cumulusnetworks.com/repo CumulusLinux-5.0.1 cumulus upstream netq
 # deb-src  http://apt.cumulusnetworks.com/repo CumulusLinux-5.0.1 cumulus upstream netq

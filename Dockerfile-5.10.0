@@ -1,4 +1,5 @@
-FROM debian:bookworm-20241111
+# FROM debian:bookworm-20241111
+FROM debian:bookworm
 
 ENV container docker
 ENV LC_ALL C
@@ -21,7 +22,7 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 191184DAB33070E2
 RUN apt update
 
 # JvB: Install troublesome pkg first
-RUN apt install -y auditd cumulus-overrides
+RUN apt install -y auditd systemd cumulus-overrides=4.0-cl5.10.0u6
 
 # Delete unwanted packages
 RUN  sed -i '/cumulus-docker-setup/d' packages && \
