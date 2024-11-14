@@ -20,6 +20,9 @@ RUN mkdir -p /usr/lib/systemd/system-preset/
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 191184DAB33070E2
 RUN apt update
 
+# JvB: Install troublesome pkg first
+RUN apt install -y auditd cumulus-overrides
+
 # Delete unwanted packages
 RUN  sed -i '/cumulus-docker-setup/d' packages && \
     sed -i '/docker-ce/d' packages && \
